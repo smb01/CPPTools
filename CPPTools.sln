@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "uacbypass", "uacbypass\uacb
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "uachijack", "uachijack\uachijack.vcxproj", "{F5593633-8560-4316-BBF2-8CC8D6080843}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lcx", "lcx\lcx.vcxproj", "{A7D0DCBC-741A-4A51-B9B4-574D9CA45F64}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{F5593633-8560-4316-BBF2-8CC8D6080843}.Release|x64.Build.0 = Release|x64
 		{F5593633-8560-4316-BBF2-8CC8D6080843}.Release|x86.ActiveCfg = Release|Win32
 		{F5593633-8560-4316-BBF2-8CC8D6080843}.Release|x86.Build.0 = Release|Win32
+		{A7D0DCBC-741A-4A51-B9B4-574D9CA45F64}.Debug|x64.ActiveCfg = Debug|x64
+		{A7D0DCBC-741A-4A51-B9B4-574D9CA45F64}.Debug|x64.Build.0 = Debug|x64
+		{A7D0DCBC-741A-4A51-B9B4-574D9CA45F64}.Debug|x86.ActiveCfg = Debug|Win32
+		{A7D0DCBC-741A-4A51-B9B4-574D9CA45F64}.Debug|x86.Build.0 = Debug|Win32
+		{A7D0DCBC-741A-4A51-B9B4-574D9CA45F64}.Release|x64.ActiveCfg = Release|x64
+		{A7D0DCBC-741A-4A51-B9B4-574D9CA45F64}.Release|x64.Build.0 = Release|x64
+		{A7D0DCBC-741A-4A51-B9B4-574D9CA45F64}.Release|x86.ActiveCfg = Release|Win32
+		{A7D0DCBC-741A-4A51-B9B4-574D9CA45F64}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
