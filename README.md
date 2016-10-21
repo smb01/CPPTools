@@ -5,6 +5,9 @@
 
 ### injectdll
     injectdll.exe pid dll_full_path [func]
+   
+### injectrun
+    injectrun.exe pid cmdline
     
 ### recvfile&sendfile
     recvfile.exe listenport
