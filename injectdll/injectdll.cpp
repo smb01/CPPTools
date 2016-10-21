@@ -7,7 +7,6 @@
 typedef HMODULE(WINAPI *typeLoadLibrary)(LPCSTR);
 typedef BOOL(WINAPI *typeFreeLibrary)(HMODULE hLibModule);
 typedef FARPROC(WINAPI *typeGetProcAddress)(HMODULE, LPCSTR);
-typedef void (WINAPI *typeExitThread)(DWORD);
 typedef void (WINAPI *typeFunc)(void);
 
 struct FuncInfo
@@ -79,6 +78,36 @@ void InjectDLL(const char* pid, const char* pathDll, const char* func)
 		printf("OpenProcess failed, err = %d", GetLastError());
 }
 
+BOOL EnableProcessPrivilege(HANDLE hProcess, PCHAR pstrPrivilege, BOOL bEnable)
+{
+	HANDLE hToken = NULL;
+	TOKEN_PRIVILEGES tp = { 0 };
+	if (!OpenProcessToken(hProcess, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken))
+		return FALSE;
+	tp.PrivilegeCount = 1;
+	if (!LookupPrivilegeValue(NULL, pstrPrivilege, &tp.Privileges[0].Luid))
+	{
+		CloseHandle(hToken);
+		return FALSE;
+	}
+	if (bEnable)
+		tp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+	else
+		tp.Privileges[0].Attributes = 0;
+	if (!AdjustTokenPrivileges(hToken, FALSE, &tp, sizeof(TOKEN_PRIVILEGES), NULL, NULL))
+	{
+		CloseHandle(hToken);
+		return FALSE;
+	}
+	if (GetLastError() == ERROR_NOT_ALL_ASSIGNED)
+	{
+		CloseHandle(hToken);
+		return FALSE;
+	}
+	CloseHandle(hToken);
+	return TRUE;
+}
+
 int main(int argc, char* argv[])
 {
 	if (argc !=3 && argc != 4)
@@ -87,6 +116,7 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
+	EnableProcessPrivilege(GetCurrentProcess(), SE_DEBUG_NAME, TRUE);
 	if (argc == 3)
 		InjectDLL(argv[1], argv[2], NULL);
 	if (argc == 4)
